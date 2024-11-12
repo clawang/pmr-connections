@@ -1,8 +1,5 @@
 export interface GameData {
     categories: Array<GameLevel>;
-    title: string;
-    author?: GameAuthor|null;
-    time_created?: Date|null;
 }
 
 export interface GameAuthor {
@@ -22,4 +19,10 @@ export interface GameItem {
     selected: boolean;
     id: number;
     mistake: boolean;
+}
+
+export interface GameHistory {
+    moves: Array<Array<GameItem>>;
+    mistakes: number;
+    hasWon: boolean;
 }

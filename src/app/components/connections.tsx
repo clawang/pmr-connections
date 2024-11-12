@@ -1,11 +1,13 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
+import PopUp from './Popup';
 import { GameData, GameLevel, GameItem } from '../types';
-import Link from 'next/link';
+import { addGame } from '../../firebase/firebase';
+import Image from 'next/image';
 import '../App.scss';
 
-const URL = "https://custom-connections-game.vercel.app/";
-
-function Connections({ gameData, slug }: { gameData: GameData, slug: string }) {
+function Connections({ gameData, popup, setPopup }: {
+    gameData: GameData, popup: number, setPopup: (popup: number) => void
+}) {
     const [items, setItems] = useState<Array<GameItem>>([]);
     const [completed, setCompleted] = useState<Array<GameLevel>>([]);
     const [history, setHistory] = useState<Array<Array<GameItem>>>([]);
@@ -16,11 +18,14 @@ function Connections({ gameData, slug }: { gameData: GameData, slug: string }) {
 
     // manage UI
     const [toast, setToast] = useState("");
-    const [popup, setPopup] = useState(false);
+    
     const [answerIndex, setAnswerIndex] = useState(0);
 
     useEffect(() => {
         setItems(getItems(gameData.categories));
+        setTimeout(() => {
+            setPopup(2);
+        }, 1000);
     }, [gameData]);
 
     const getItems = (categories: Array<GameLevel>) => {
@@ -175,37 +180,17 @@ function Connections({ gameData, slug }: { gameData: GameData, slug: string }) {
 
     const gameOver = () => {
         if (gameState === 0) setGameState(2);
+        addGame(history, mistakes, new Date());
         setTimeout(() => {
-            setPopup(true);
+            setPopup(1);
         }, 1000);
     }
 
     return (
         <>
             <div id="toast" className={toast.length > 0 ? "show" : ""}><p>{toast}</p></div>
-            <PopUp state={gameState} mistakes={mistakes} title={gameData.title} history={history} slug={slug} popup={popup} setPopup={setPopup} />
-            <div className="header">
-                <div className="title">
-                    <h1>Custom Connections</h1>
-                </div>
-                <div className="nav-button"><Link href="/">New game</Link></div>
-            </div>
-            <div className="game-title">
-                <h2>{gameData.title}</h2>
-                <h3>
-                    {
-                        gameData.author ?
-                            <>by {
-                                gameData.author.link ?
-                                    <a href={gameData.author.link} target="_blank">{gameData.author.name}</a>
-                                    :
-                                    gameData.author.name
-                            }</>
-                            :
-                            ""
-                    }
-                </h3>
-            </div>
+            <PopUp popup={popup} setPopup={setPopup} />
+            <h2>Let's Connect!</h2>
             <p>Create four groups of four!</p>
             <div className="connections-wrapper">
                 {completed.map((category, index) => <RowDone key={index} data={category} />)}
@@ -215,7 +200,13 @@ function Connections({ gameData, slug }: { gameData: GameData, slug: string }) {
                 <div className="mistakes-container">
                     <p>Mistakes remaining:</p>
                     <div className="bubbles-container">
-                        {renderBubbles().map((bubble, index) => <div className="bubble" key={index}></div>)}
+                        {renderBubbles().map((bubble, index) => {
+                            return (
+                                <div className="bubble" key={index}>
+                                    <Image src="/ornament.png" alt="Mistake" width="26" height="30" />
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
                 :
@@ -225,11 +216,11 @@ function Connections({ gameData, slug }: { gameData: GameData, slug: string }) {
                 {gameState === 0 ?
                     <>
                         <button onClick={shuffleItems}>Shuffle</button>
-                        <button id="deselect-all-button" onClick={deselectAll}>Deselect All</button>
+                        <button id="deselect-all-button" disabled={numSelected === 0} onClick={deselectAll}>Deselect All</button>
                         <button id="submit-button" disabled={numSelected === 4 ? false : true} onClick={checkSubmit}>Submit</button>
                     </>
                     :
-                    <button onClick={() => setPopup(true)}>View Results</button>
+                    <button onClick={() => setPopup(1)}>View Results</button>
                 }
             </div>
         </>
@@ -261,66 +252,6 @@ function Item({ data, onSelect }: { data: GameItem, onSelect: () => void }) {
     return (
         <div className={"item" + (data.selected ? " selected" : "") + (data.mistake ? " invalid-shake" : "")} onClick={handleClick}>
             {data.title}
-        </div>
-    );
-}
-
-function PopUp({ state, mistakes, title, history, slug, popup, setPopup }: {
-    state: number,
-    mistakes: number,
-    title: string,
-    history: Array<Array<GameItem>>,
-    slug: string,
-    popup: boolean,
-    setPopup: (popup: boolean) => void,
-}) {
-    const [buttonState, setButtonState] = useState<number>(0);
-
-    const classNames = ["yellow", "green", "blue", "purple"];
-    const emojis = ["🟨", "🟩", "🟦", "🟪"];
-
-    const share = () => {
-        let text = "Connections: " + title + "\n";
-        for (const row of history) {
-            for (const item of row) {
-                text += emojis[item.level];
-            }
-            text += "\n";
-        }
-        text += URL + slug;
-        if (navigator.share && navigator.canShare({ text })) {
-            navigator.share({ text });
-        } else {
-            navigator.clipboard.writeText(text);
-            setButtonState(1);
-            setTimeout(() => setButtonState(0), 1000);
-        }
-    }
-
-    return (
-        <div id="popup" className={popup ? "show" : ""}>
-            <div id="popup-content">
-                <div className="close-x" onClick={() => setPopup(false)}></div>
-                {
-                    state === 2 ?
-                        <>
-                            {mistakes === 4 ?
-                                <h2>Perfect!</h2>
-                                :
-                                <h2>Great!</h2>
-                            }
-                        </>
-                        :
-                        <>
-                            <h2>Next Time!</h2>
-                        </>
-                }
-                <h3>Connections: {title}</h3>
-                <div id="emoji-recap">
-                    {history.map((round, index) => <div key={index} className="emoji-row">{round.map((item, index) => <div key={index} className={"emoji " + classNames[item.level]}></div>)}</div>)}
-                </div>
-                <button onClick={share}>{buttonState === 0 ? "Share Your Results" : "Copied to Clipboard"}</button>
-            </div>
         </div>
     );
 }

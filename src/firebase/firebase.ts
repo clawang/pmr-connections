@@ -1,11 +1,22 @@
 import { collection, doc, addDoc, setDoc, getDoc, DocumentReference, DocumentData, FirestoreError, QueryDocumentSnapshot, SnapshotOptions, } from 'firebase/firestore';
 import { database } from "./config";
-import { GameData, GameAuthor } from '../app/types';
+import { GameHistory, GameItem } from '../app/types';
 
-const dbInstance = collection(database, 'connections');
+const dbInstance = collection(database, 'plays');
 
-export async function addGame(data: GameData): Promise<{ result: DocumentReference, error: FirestoreError | undefined }> {
+export async function addGame(
+    moves: Array<Array<GameItem>>,
+    mistakesLeft: number,
+    timeCompleted: Date,
+): Promise<{ result: DocumentReference, error: FirestoreError | undefined }> {
     let result, error;
+
+    const data = {
+        moves: moves.toString(),
+        mistakes: 4 - mistakesLeft,
+        hasWon: mistakesLeft > 0,
+        timeCompleted
+    };
 
     result = await addDoc(dbInstance, data).catch((e) => error = e);
 
@@ -15,47 +26,41 @@ export async function addGame(data: GameData): Promise<{ result: DocumentReferen
     return { result, error };
 }
 
-export async function updateGame(slug: string, data: GameData): Promise<void> {
-    await setDoc(doc(database, "connections", slug), data);
-}
+// export async function updateGame(slug: string, data: GameData): Promise<void> {
+//     await setDoc(doc(database, "connections", slug), data);
+// }
 
-export async function getDataFromSlug(slug: string): Promise<{ result: GameData | null, error: string }> {
-    const ref = doc(database, "connections", slug).withConverter(dataConverter);
-    const document = await getDoc(ref);
-    const data = document.data();
+// export async function getDataFromSlug(slug: string): Promise<{ result: GameData | null, error: string }> {
+//     const ref = doc(database, "connections", slug).withConverter(dataConverter);
+//     const document = await getDoc(ref);
+//     const data = document.data();
 
-    if (data) {
-        return { result: data, error: "" };
-    } else {
-        return { result: null, error: "Error." };
-    }
-}
+//     if (data) {
+//         return { result: data, error: "" };
+//     } else {
+//         return { result: null, error: "Error." };
+//     }
+// }
 
 const dataConverter = {
-    toFirestore: (data: GameData): DocumentData => {
+    toFirestore: (data: GameHistory): DocumentData => {
         let result: DocumentData = {
-            categories: data.categories,
-            title: data.title,
+            mistakes: data.mistakes,
+            hasWon: data.hasWon,
+            moves: data.moves,
+            timeCompleted: data.timeCompleted
         };
-        if (data.author) {
-            result['author'] = {
-                name: data.author.name,
-                link: data.author.link
-            };
-        }
         return result;
     },
     fromFirestore: (snapshot: QueryDocumentSnapshot,
         options: SnapshotOptions) => {
         const data = snapshot.data(options);
-        let result = { categories: data.categories, title: data.title, author: data.author } as GameData;
-        if (data.author) {
-            let author: GameAuthor = { name: data.author.name };
-            if (data.author.link) {
-                author.link = data.author.link;
-            }
-            result.author = author;
-        }
+        let result = {
+            mistakes: data.mistakes,
+            hasWon: data.hasWon,
+            moves: data.moves,
+            timeCompleted: data.timeCompleted
+        } as GameHistory;
         return result;
     }
 };

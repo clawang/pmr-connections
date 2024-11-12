@@ -1,20 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { CSPostHogProvider } from './providers'
 import Head from 'next/head';
-import dynamic from 'next/dynamic'
 import Script from 'next/script'
 import './globals.css'
-
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false,
-})
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Custom Connections',
-  description: 'Create your own custom version of the NYT Connections game.',
+  title: 'Holiday Connections | Payne Mitchell Ramsey',
+  description: 'A law and holiday themed connections to raise money for the Legal Aid of NorthWest Texas.',
 }
 
 export default function RootLayout({
@@ -25,12 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <title>Custom Connections</title>
+        <title>Holiday Connections</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <CSPostHogProvider>
         <body className={inter.className}>
-          <PostHogPageView />
           {children}
           <Script
             async
@@ -39,7 +31,6 @@ export default function RootLayout({
             strategy="lazyOnload"
           />
         </body>
-      </CSPostHogProvider>
     </html>
   )
 }

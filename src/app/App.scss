@@ -1,50 +1,52 @@
 @font-face {
-  font-family: 'Franklin Light';
-  src: url("./assets/franklin-normal-500.ttf");
+  font-family: "Neusa Next Pro Regular";
+  src: url("./assets/NeusaNextPro-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Franklin";
-  src: url("./assets/franklin-normal-600.ttf");
+  font-family: "Neusa Next Pro Medium";
+  src: url("./assets/NeusaNextPro-Bold.ttf");
 }
 
 @font-face {
-  font-family: "Franklin Bold";
-  src: url("./assets/franklin-normal-700.ttf");
+  font-family: "Neusa Next Pro Condensed";
+  src: url("./assets/NeusaNextPro-CondensedMedium.ttf");
 }
 
-@font-face {
-  font-family: "Karnak Condensed";
-  src: url("./assets/karnakpro-condensedblack.ttf");
-}
-
-$item-grey: #efefe6;
-$selected-color: #5a594e;
-$yellow: #f9df6d;
-$green: #a0c35a;
-$blue: #b0c4ef;
-$purple: #ba81c5;
+$item-grey: #fff;
+$selected-color: #000;
+$yellow: #e6f8ff;
+$green: #dd3a26;
+$blue: #ffffff;
+$purple: #82bc0d;
 $disabled: #7f7f7f;
+$pmr-green: #BDDC04;
+
+html, body {
+  background: $pmr-green;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
 h1 {
-  font-family: 'Karnak Condensed', serif;
+  font-family: 'Neusa Next Pro Medium', serif;
   font-weight: 100;
-  letter-spacing: 1px;
   font-size: 42px;
 }
 
 h2,
 h3,
 h4 {
-  font-family: 'Franklin Bold', sans-serif;
+  font-family: 'Neusa Next Pro Medium', sans-serif;
 }
 
 p {
-  font-family: 'Franklin Light', sans-serif;
+  font-family: 'Neusa Next Pro Regular', sans-serif;
 }
 
 button {
-  font-family: 'Franklin', sans-serif;
+  font-family: 'Neusa Next Pro Regular', sans-serif;
   font-size: 16px;
   font-weight: 600;
   display: flex;
@@ -59,8 +61,8 @@ button {
   border-radius: 32px;
   line-height: 16px;
   cursor: pointer;
-  border: black solid 1px;
-  background: white;
+  border: black solid 2px;
+  background: $pmr-green;
   color: black;
 }
 
@@ -69,22 +71,9 @@ form {
   text-align: left;
 }
 
-label {
-  padding: 5px 0;
-  display: block;
-}
-
-input {
-  width: 100%;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 3px;
-  border: 1px solid black;
-}
-
 .App {
   text-align: center;
-  padding-bottom: 20px;
+  width: 100%;
 }
 
 .container {
@@ -104,8 +93,6 @@ input {
 
 .instructions {
   text-align: left;
-  width: 150px;
-  margin: 20px auto 0;
 }
 
 .help-emojis {
@@ -151,159 +138,88 @@ input {
   position: absolute;
 }
 
-.author {
-
-  h4 {
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-
-  div {
-    padding: 10px;
-    border: 1px solid black;
-  }
-}
-
-.category-form-wrapper {
-  border-radius: 3px;
-  padding: 10px;
-  margin: 5px 0;
-  position: relative;
-
-  label {
-    padding: 5px;
-  }
-
-  >label {
-    width: 90%;
-  }
-
-  &:nth-of-type(1) {
-    background: $yellow;
-  }
-
-  &:nth-of-type(2) {
-    background: $green;
-  }
-
-  &:nth-of-type(3) {
-    background: $blue;
-  }
-
-  &:nth-of-type(4) {
-    background: $purple;
-  }
-}
-
-.order-buttons {
-  position: absolute;
-  top: 20px;
-  right: 15px;
-
-  button {
-    background: black;
-    color: white;
-    margin: 2px;
-    min-width: 0;
-    height: auto;
-    padding: 3px 7px;
-    font-size: 12px;
-    border-radius: 3px;
-
-    &:disabled {
-      background: $disabled;
-      border-color: $disabled;
-      cursor:not-allowed;
-    }
-  }
-}
-
-.category-items-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-
-  label {
-    width: 50%;
-  }
-}
-
-.game-link {
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    margin: 10px 0;
-  }
-}
-
 .header {
-  padding: 24px 24px 5px;
+  padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1280px;
+  margin: 0;
+  width: 100%;
+  background: black;
+  view-transition-name: header;
 
   h1 {
     margin-right: 16px;
   }
 
   img {
-    width: 204px;
     flex-shrink: 0;
-    margin-right: 16px;
   }
 
   .title {
     display: flex;
     align-items: center;
   }
-}
 
-.game-title {
-  margin: 10px 0 30px;
-
-  h2, h3 {
-    font-family: 'Franklin Light', sans-serif;
-    font-size: 28px;
-    font-weight: 300;
-  }
-
-  h3 {
-    font-size: 20px;
-  }
-
-  a {
-    text-decoration: underline;
-  }
-
-  a:hover {
-    color: $blue;
+  #gift {
+    cursor: pointer;
   }
 }
 
-.nav-button {
+.start-screen {
+  width: 100%;
+  height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-text {
+  max-width: 400px;
+  flex-grow: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  font-family: "Franklin";
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .047em;
-  text-transform: uppercase;
-  height: 36px;
-  border: 1px solid #f4f4f4;
-  border-radius: 3px;
-  color: #fff;
-  border-color: #000;
-  background-color: #000;
-  margin-left: 8px;
-  padding: 1px 33px 4px;
-  cursor: pointer;
+
+  h1, p {
+    margin: 0.1em 0;
+  }
+
+  img {
+    margin-bottom: 10px;
+  }
+
+  button {
+    background: #000;
+    color: white;
+    margin: 30px 0;
+    width: 120px;
+    padding: 10px 30px;
+    height: auto;
+  }
+}
+
+.info-wrapper {
+  margin-top: 50px;
+  max-width: 600px;
+
+  p {
+    line-height: 1.5em;
+  }
+}
+
+::view-transition-old(root) {
+  animation-duration: 0.5s;
+}
+
+::view-transition-new(root) {
+  animation-delay: 0.5s;
+  animation-duration: 0.5s;
+}
+
+.game-wrapper {
+  padding: 40px 20px;
 }
 
 .connections-wrapper {
@@ -345,7 +261,7 @@ input {
   }
 
   h3 {
-    font-family: "Franklin Bold", sans-serif;
+    font-family: "Neusa Next Pro Medium", sans-serif;
     font-weight: 600;
     text-transform: uppercase;
     margin: 0;
@@ -355,8 +271,7 @@ input {
 
   p {
     margin: 0;
-    font-family: "Franklin", sans-serif;
-    text-transform: uppercase;
+    font-family: "Neusa Next Pro Regular", sans-serif;
     font-size: 20px;
     line-height: 20px;
   }
@@ -376,8 +291,8 @@ input {
   color: black;
   outline: none;
   text-align: center;
-  font-family: "Franklin Bold", sans-serif;
-  font-weight: 600;
+  font-family: "Neusa Next Pro Condensed", sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
   border-radius: 6px;
   z-index: 0;
@@ -393,6 +308,7 @@ input {
   word-break: break-word;
   text-overflow: ellipsis;
   padding: 0 4px;
+  user-select: none;
 
   &.selected {
     color: white;
@@ -403,6 +319,7 @@ input {
 .mistakes-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0 0 20px;
 }
 
@@ -411,15 +328,11 @@ input {
   justify-content: flex-start;
   width: 118px;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .bubble {
-  background-color: $selected-color;
-  width: 16px;
-  height: 16px;
-  border-radius: 9999px;
-  margin: 0 7px;
+  margin: 0 2px;
 }
 
 .buttons-wrapper {
@@ -432,9 +345,10 @@ input {
   width: 120px;
 }
 
+#deselect-all-button[disabled], 
 #submit-button[disabled] {
   border-color: #7f7f7f;
-  background-color: white;
+  background-color: $pmr-green;
   color: #7f7f7f;
   cursor: not-allowed;
 }
@@ -450,7 +364,7 @@ input {
 
 #toast {
   visibility: hidden;
-  font-family: 'NYT-Franklin';
+  font-family: 'Neusa Next Pro Regular';
   position: fixed;
   left: 50%;
   transform: translateX(calc(-50% - 30px));
@@ -481,13 +395,14 @@ input {
   position: absolute;
   z-index: 8;
   justify-content: center;
-  top: 0;
+  top: 100px;
   bottom: 0;
   right: 0;
   left: 0;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  align-items: flex-start;
+  // background-color: rgba(255, 255, 255, 0.8);
   display: none;
+  padding: 30px;
 
   &.show {
     display: flex;
@@ -497,11 +412,9 @@ input {
 #popup-content {
   width: 100%;
   max-width: 520px;
-  padding: 32px;
+  padding: 50px 32px;
   animation: slideIn 200ms;
-  box-shadow: 0 3px 12px -1px rgba(0, 0, 0, 0.3);
   position: relative;
-  border-radius: 10px;
   background-color: white;
   text-align: center;
   display: flex;
@@ -509,22 +422,62 @@ input {
   align-items: center;
 
   h2 {
-    font-family: 'Karnak Condensed', serif;
+    font-family: 'Neusa Next Pro Medium', serif;
     font-size: 36px;
     margin: 8px 0 0 0;
-    letter-spacing: 1px;
     font-weight: 100;
   }
 
   h3 {
-    font-family: 'Franklin Light', sans-serif;
-    font-weight: 100;
+    font-family: 'Neusa Next Pro Medium', sans-serif;
+    margin: 0.5em 0;
+    font-size: 20px;
+  }
+
+  h4 {
+    margin: 0.5em 0;
+  }
+
+  ul {
+    margin: 15px 0 15px 35px;
+  }
+
+  li {
+    font-size: 16px;
+    font-family: 'Neusa Next Pro Regular', sans-serif;
+    position: relative;
+    margin: 20px 0;
+    list-style-type: none;
+
+    &::before {
+      content: '';
+      background: url('/ornament.png');
+      width: 26px;
+      height: 30px;
+      display: block;
+      background-size: contain;
+      position: absolute;
+      left: -40px;
+      top: -8px;
+    }
+  }
+
+  p {
+    line-height: 1.5em;
+    margin: 10px 0;
   }
 
   button {
-    background: black;
+    background: $purple;
     color: white;
+    border: none;
+    text-transform: uppercase;
+    margin: 10px 0;
   }
+}
+
+#share-image {
+  display: none;
 }
 
 .close-x {
@@ -601,6 +554,12 @@ input {
     padding: 15px;
     width: 100%;
     // flex-direction: column;
+  }
+
+  #popup {
+    top: 90px;
+    padding: 30px 15px;
+    align-items: flex-start;
   }
 
   .title {
