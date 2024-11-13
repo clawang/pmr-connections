@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/dom-view-transitions": "^1.0.5",
     "@vercel/analytics": "^1.1.4",
     "firebase": "^10.14.1",
     "next": "14.0.3",
