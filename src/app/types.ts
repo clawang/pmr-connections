@@ -22,7 +22,8 @@ export interface GameItem {
 }
 
 export interface GameHistory {
-    moves: Array<Array<GameItem>>;
+    moves: string;
     mistakes: number;
     hasWon: boolean;
+    timeCompleted: Date;
 }
