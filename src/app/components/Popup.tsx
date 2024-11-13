@@ -23,8 +23,6 @@ function PopUp({ popup, setPopup }: {
         ctx!.drawImage(document.getElementById("share-image") as HTMLImageElement, 0, 0);       // draw in image
         c.toBlob(function (blob) {        // get content as JPEG blob
             // here the image is a blob
-            console.log(blob);
-            console.log('blob');
             sharingFunction(blob!);
         }, "image/jpeg", 0.75);
     }
@@ -33,8 +31,6 @@ function PopUp({ popup, setPopup }: {
         let text = "Connections: PMR\n";
         const files = [new File([blob], "PMR-Connections.jpeg", { type: "image/jpeg" })];
         if (navigator.share && navigator.canShare({ files })) {
-            console.log('trying to share');
-            console.log(files);
             navigator.share({ files });
         } else {
             navigator.clipboard.writeText(text);
