@@ -1,18 +1,17 @@
-import { collection, doc, addDoc, setDoc, getDoc, DocumentReference, DocumentData, FirestoreError, QueryDocumentSnapshot, SnapshotOptions, } from 'firebase/firestore';
+import { collection, doc, addDoc, query, where, DocumentReference, DocumentData, FirestoreError, QueryDocumentSnapshot, SnapshotOptions, getCountFromServer, getAggregateFromServer, average } from 'firebase/firestore';
 import { database } from "./config";
 import { GameHistory, GameItem } from '../app/types';
 
 const dbInstance = collection(database, 'plays');
+const shareDb = collection(database, 'shares');
 
 export async function addGame(
-    moves: Array<Array<GameItem>>,
     mistakesLeft: number,
     timeCompleted: Date,
 ): Promise<{ result: DocumentReference, error: FirestoreError | undefined }> {
     let result, error;
 
     const data = {
-        moves: moves.toString(),
         mistakes: 4 - mistakesLeft,
         hasWon: mistakesLeft > 0,
         timeCompleted
@@ -26,28 +25,46 @@ export async function addGame(
     return { result, error };
 }
 
-// export async function updateGame(slug: string, data: GameData): Promise<void> {
-//     await setDoc(doc(database, "connections", slug), data);
-// }
+export async function addShare(
+    timeCompleted: Date,
+): Promise<{ result: DocumentReference, error: FirestoreError | undefined }> {
+    let result, error;
 
-// export async function getDataFromSlug(slug: string): Promise<{ result: GameData | null, error: string }> {
-//     const ref = doc(database, "connections", slug).withConverter(dataConverter);
-//     const document = await getDoc(ref);
-//     const data = document.data();
+    const data = {
+        timeCompleted
+    };
 
-//     if (data) {
-//         return { result: data, error: "" };
-//     } else {
-//         return { result: null, error: "Error." };
-//     }
-// }
+    result = await addDoc(shareDb, data).catch((e) => error = e);
+
+    if (error) {
+        console.log(error);
+    }
+    return { result, error };
+}
+
+export async function getMetrics(): Promise<object> {
+    const count = await getCountFromServer(dbInstance);
+    const q = query(dbInstance, where("hasWon", "==", true));
+    const snapshot = await getCountFromServer(q);
+
+    const averageMistakes = await getAggregateFromServer(dbInstance, {
+        averageMistakes: average('mistakes')
+    });
+    const shareCount = await getCountFromServer(shareDb);
+
+    return { 
+        count: count.data().count, 
+        mistakes: averageMistakes.data().averageMistakes,
+        hasWon: snapshot.data().count,
+        shareCount: shareCount.data().count,
+    };
+}
 
 const dataConverter = {
     toFirestore: (data: GameHistory): DocumentData => {
         let result: DocumentData = {
             mistakes: data.mistakes,
             hasWon: data.hasWon,
-            moves: data.moves,
             timeCompleted: data.timeCompleted
         };
         return result;
@@ -58,7 +75,6 @@ const dataConverter = {
         let result = {
             mistakes: data.mistakes,
             hasWon: data.hasWon,
-            moves: data.moves,
             timeCompleted: data.timeCompleted
         } as GameHistory;
         return result;

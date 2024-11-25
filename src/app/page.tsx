@@ -66,6 +66,8 @@ function App() {
                         </div>
                         <div className="info-wrapper">
                             <p>Each connection you make helps give back to the Legal Aid of NorthWest Texas, ensuring access to justice for individuals and communities in need.</p>
+                            <p>Want to donate directly to legal aid?</p>
+                            <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank"><button className="donate-button">Donate Today</button></a>
                         </div>
                     </div>
                 }

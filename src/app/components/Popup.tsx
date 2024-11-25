@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { GameItem } from '../types';
 import shareImage from '../assets/share-image.png';
-import {default as NextImage, StaticImageData} from 'next/image';
+import { default as NextImage, StaticImageData } from 'next/image';
+import { addShare } from '../../firebase/firebase';
 
 function PopUp({ popup, setPopup }: {
     popup: number,
@@ -28,12 +28,18 @@ function PopUp({ popup, setPopup }: {
     }
 
     const share = (blob: BlobPart) => {
-        let text = "Connections: PMR\n";
+        addShare(new Date());
         const files = [new File([blob], "PMR-Connections.jpeg", { type: "image/jpeg" })];
         if (navigator.share && navigator.canShare({ files })) {
-            navigator.share({ files });
+            navigator.share({ files, url: "https://pmr-connections.vercel.app/" });
         } else {
-            navigator.clipboard.writeText(text);
+            // navigator.clipboard.writeText(text);
+            var a = document.createElement('a');
+            a.href = shareImage.src;
+            a.download = "pmr-connections.png";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
             setButtonState(1);
             setTimeout(() => setButtonState(0), 1000);
         }
@@ -49,8 +55,9 @@ function PopUp({ popup, setPopup }: {
                         <h2>Cheers!</h2>
                         <p>How'd you do?</p>
                         <p>Share to your stories to invite others to play!</p>
-                        <img src={shareImage.src} id="share-image" />
-                        <button onClick={startShare}>{buttonState === 0 ? "Share Your Results" : "Copied to Clipboard"}</button>
+                        <img src={shareImage.src} alt="share image" id="share-image" />
+                        <button onClick={startShare}>{buttonState === 0 ? "Share Your Results" : "Downloading image"}</button>
+                        {/* <button onClick={fbs_click}>Share to Facebook</button> */}
                     </>
                     :
                     <div className="instructions">

@@ -206,7 +206,18 @@ form {
 
   p {
     line-height: 1.5em;
+    margin: 10px 0;
   }
+}
+
+.donate-button {
+  background: #75b50f;
+  color: white;
+  border: none;
+  display: inline-block;
+  text-transform: uppercase;
+  height: auto;
+  padding: 13px 20px;
 }
 
 ::view-transition-old(root) {
@@ -543,6 +554,46 @@ form {
   .nav-button {
     width: auto;
   }
+}
+
+.password-screen {
+  max-width: 400px;
+
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  button {
+    display: inline-block;
+  }
+
+  .error {
+    color: red;
+  }
+}
+
+.screen {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.metrics-wrapper {
+  // display: flex;
+  // justify-content: center;
+}
+
+.metrics-container {
+  padding: 10px;
+  max-width: 200px;
+}
+
+td, th {
+  padding: 5px 15px;
 }
 
 @media screen and (max-width: 600px) {

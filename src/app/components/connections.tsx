@@ -180,7 +180,7 @@ function Connections({ gameData, popup, setPopup }: {
 
     const gameOver = () => {
         if (gameState === 0) setGameState(2);
-        addGame(history, mistakes, new Date());
+        addGame(mistakes, new Date());
         setTimeout(() => {
             setPopup(1);
         }, 1000);
@@ -220,7 +220,7 @@ function Connections({ gameData, popup, setPopup }: {
                         <button id="submit-button" disabled={numSelected === 4 ? false : true} onClick={checkSubmit}>Submit</button>
                     </>
                     :
-                    <button onClick={() => setPopup(1)}>View Results</button>
+                    <button onClick={() => setPopup(1)}>Share your results</button>
                 }
             </div>
         </>
