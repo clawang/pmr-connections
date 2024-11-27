@@ -44,7 +44,7 @@ function App() {
     }
 
     return (
-        <PlausibleProvider domain="pmr-connections.vercel.app/">
+        <PlausibleProvider domain="pmr-connections.vercel.app">
             <div className="App">
                 <div className="header">
                     <Image src="/logo.png" width={100} height={60} alt="Payne Mitchell Ramsey Law Group" />

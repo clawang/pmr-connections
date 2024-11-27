@@ -8,11 +8,34 @@ function App() {
     const [authenticated, setAuth] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("");
     const [metrics, setMetrics] = useState<any>(null);
+    const [visitors, setVisitors] = useState(-1);
     const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
         if (!metrics) {
             getData();
+        }
+        if (!visitors || visitors < 0) {
+            fetch('https://plausible.io/api/v2/query', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${process.env.NEXT_PUBLIC_PLAUSIBLE_KEY}`,
+                },
+                body: JSON.stringify({
+                    "site_id": "pmr-connections.vercel.app",
+                    "metrics": ["visitors"],
+                    "date_range": "all",
+                })
+            })
+                .then((response) => response.json())
+                .then((body) => {
+                    const data = body as any;
+                    // console.log(data.results?.[0]?.metrics?.[0]);
+                    if (data.results?.[0]?.metrics?.[0]) {
+                        setVisitors(data.results[0].metrics[0]);
+                    }
+                });
         }
     }, []);
 
@@ -46,12 +69,14 @@ function App() {
                                     <tr>
                                         <th>Total Plays</th>
                                         <th>Total Games Won</th>
+                                        <th>Total Unique Players</th>
                                         <th>Average Mistakes</th>
                                         <th>Number of shares</th>
                                     </tr>
                                     <tr>
                                         <td>{metrics.count}</td>
                                         <td>{metrics.hasWon}</td>
+                                        <td>{visitors}</td>
                                         <td>{metrics.mistakes.toFixed(2)}</td>
                                         <td>{metrics.shareCount}</td>
                                     </tr>
