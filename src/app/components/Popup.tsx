@@ -45,6 +45,14 @@ function PopUp({ popup, setPopup }: {
         }
     }
 
+    // function fbs_click() {
+    //     const TheImg = document.getElementById("share-image") as HTMLImageElement;
+    //     const u = TheImg.src;
+    //     // t=document.title;
+    //     const t = TheImg.getAttribute('alt');
+    //     window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t!), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false;
+    // }
+
     return (
         <div id="popup" className={popup > 0 ? "show" : ""}>
             <div id="popup-content">

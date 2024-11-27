@@ -45,14 +45,14 @@ function App() {
                                 <table>
                                     <tr>
                                         <th>Total Plays</th>
+                                        <th>Total Games Won</th>
                                         <th>Average Mistakes</th>
-                                        <th>Percentage of games won</th>
                                         <th>Number of shares</th>
                                     </tr>
                                     <tr>
                                         <td>{metrics.count}</td>
+                                        <td>{metrics.hasWon}</td>
                                         <td>{metrics.mistakes.toFixed(2)}</td>
-                                        <td>{`${((metrics.hasWon / metrics.count) * 100).toFixed(2)}%`}</td>
                                         <td>{metrics.shareCount}</td>
                                     </tr>
                                 </table>

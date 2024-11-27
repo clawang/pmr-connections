@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Head from 'next/head';
 import Script from 'next/script'
+import PlausibleProvider from 'next-plausible'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,6 +22,7 @@ export default function RootLayout({
       <Head>
         <title>Holiday Connections</title>
         <link rel="shortcut icon" href="/favicon.ico" />
+        <PlausibleProvider domain="pmr-connectinos.vercel.app" />
       </Head>
         <body className={inter.className}>
           {children}
