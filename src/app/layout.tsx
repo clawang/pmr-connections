@@ -22,7 +22,7 @@ export default function RootLayout({
       <Head>
         <title>Holiday Connections</title>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <PlausibleProvider domain="pmr-connectinos.vercel.app" />
+        <PlausibleProvider domain="pmr-connections.vercel.app/" />
       </Head>
         <body className={inter.className}>
           {children}
