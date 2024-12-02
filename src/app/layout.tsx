@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <title>Holiday Connections</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/gift.png" />
         <PlausibleProvider domain="pmr-connections.vercel.app" />
+        <meta property="og:title" content="Holiday Connections | Payne Mitchell Ramsey" />
+        <meta property="og:description" content="For every connection game successfully completed, Payne Mitchell Ramsey will donate to Legal Aid of NorthWest Texas." />
       </Head>
         <body className={inter.className}>
           {children}

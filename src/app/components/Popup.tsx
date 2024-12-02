@@ -45,13 +45,9 @@ function PopUp({ popup, setPopup }: {
         }
     }
 
-    // function fbs_click() {
-    //     const TheImg = document.getElementById("share-image") as HTMLImageElement;
-    //     const u = TheImg.src;
-    //     // t=document.title;
-    //     const t = TheImg.getAttribute('alt');
-    //     window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t!), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false;
-    // }
+    const sendShare = () => {
+        addShare(new Date());
+    }
 
     return (
         <div id="popup" className={popup > 0 ? "show" : ""}>
@@ -64,8 +60,10 @@ function PopUp({ popup, setPopup }: {
                         <p>How'd you do?</p>
                         <p>Share to your stories to invite others to play!</p>
                         <img src={shareImage.src} alt="share image" id="share-image" />
-                        <button onClick={startShare}>{buttonState === 0 ? "Share Your Results" : "Downloading image"}</button>
-                        {/* <button onClick={fbs_click}>Share to Facebook</button> */}
+                        <button onClick={startShare} id="first-share">{buttonState === 0 ? "Share Your Results" : "Downloading image"}</button>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=pmr-connections.vercel.app" target="_blank">
+                            <button onClick={sendShare}>Share to Facebook</button>
+                        </a>
                     </>
                     :
                     <div className="instructions">
