@@ -180,7 +180,7 @@ function Connections({ gameData, popup, setPopup }: {
 
     const gameOver = () => {
         if (gameState === 0) setGameState(2);
-        // addGame(mistakes, new Date());
+        addGame(mistakes, new Date());
         setTimeout(() => {
             setPopup(1);
         }, 1000);
