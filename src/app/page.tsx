@@ -55,23 +55,29 @@ function App() {
                     }
                 </div>
                 <div className="game-wrapper">
-                    {started ?
-                        <Connections gameData={data} popup={popup} setPopup={setPopup} />
-                        :
-                        <div className="start-screen">
-                            <div className="start-text">
-                                <Image src="/gift.png" width={80} height={107} alt="gift" />
-                                <h1>Holiday Connections</h1>
-                                <p>Group words that share a common thread.</p>
-                                <p>Can you spot the connections?</p>
-                                <button onClick={transition}>PLAY</button>
-                            </div>
-                            <div className="info-wrapper">
-                                <p>Each connection you make helps give back to the Legal Aid of NorthWest Texas, ensuring access to justice for individuals and communities in need.</p>
-                                <p>Want to donate directly to legal aid?</p>
-                                <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank"><button className="donate-button">Donate Today</button></a>
-                            </div>
+                    <Connections gameData={data} popup={popup} setPopup={setPopup} />
+                    <div className="start-screen">
+                        <div className="info-wrapper">
+                            <p>Each connection you make helps give back to the Legal Aid of NorthWest Texas, ensuring access to justice for individuals and communities in need.</p>
+                            <p>Want to donate directly to legal aid?</p>
+                            <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank"><button className="donate-button">Donate Today</button></a>
                         </div>
+                    </div>
+                    {
+                        // <div className="start-screen">
+                        //     <div className="start-text">
+                        //         <Image src="/gift.png" width={80} height={107} alt="gift" />
+                        //         <h1>Holiday Connections</h1>
+                        //         <p>Group words that share a common thread.</p>
+                        //         <p>Can you spot the connections?</p>
+                        //         <button onClick={transition}>PLAY</button>
+                        //     </div>
+                        //     <div className="info-wrapper">
+                        //         <p>Each connection you make helps give back to the Legal Aid of NorthWest Texas, ensuring access to justice for individuals and communities in need.</p>
+                        //         <p>Want to donate directly to legal aid?</p>
+                        //         <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank"><button className="donate-button">Donate Today</button></a>
+                        //     </div>
+                        // </div>
                     }
                 </div>
             </div>
