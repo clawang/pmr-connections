@@ -47,6 +47,11 @@ function PopUp({ popup, setPopup }: {
 
     const sendShare = () => {
         addShare(new Date());
+
+        const text = "https://pmr-connections.vercel.app/";
+        navigator.clipboard.writeText(text);
+        setButtonState(1);
+        setTimeout(() => setButtonState(0), 1000);
     }
 
     return (
@@ -58,12 +63,11 @@ function PopUp({ popup, setPopup }: {
                         <NextImage src="/gift.png" width={80} height={107} alt="Gift" />
                         <h2>Cheers!</h2>
                         <p>How'd you do?</p>
-                        <p>Share to your stories to invite others to play!</p>
-                        <img src={shareImage.src} alt="share image" id="share-image" />
-                        <button onClick={startShare} id="first-share">{buttonState === 0 ? "Share Your Results" : "Downloading image"}</button>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=pmr-connections.vercel.app" target="_blank">
+                        {/* <p>Invite others to play!</p> */}
+                        <button onClick={sendShare} id="first-share">{buttonState === 0 ? "Invite Others to Play" : "Copied to Clipboard"}</button>
+                        {/* <a href="https://www.facebook.com/sharer/sharer.php?u=pmr-connections.vercel.app" target="_blank">
                             <button onClick={sendShare}>Share to Facebook</button>
-                        </a>
+                        </a> */}
                     </>
                     :
                     <div className="instructions">
