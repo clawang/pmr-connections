@@ -65,22 +65,28 @@ function App() {
                         <h1>Metrics</h1>
                         {metrics ?
                             <div className="metrics-wrapper">
-                                <table>
-                                    <tr>
-                                        <th>Total Plays</th>
-                                        <th>Total Games Won</th>
-                                        <th>Total Unique Players</th>
-                                        <th>Average Mistakes</th>
-                                        <th>Number of shares</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{metrics.count}</td>
-                                        <td>{metrics.hasWon}</td>
-                                        <td>{visitors}</td>
-                                        <td>{metrics.mistakes.toFixed(2)}</td>
-                                        <td>{metrics.shareCount}</td>
-                                    </tr>
-                                </table>
+                                <div className="table">
+                                    <div className="table-column">
+                                        <div className="table-cell heading">Total Plays</div>
+                                        <div className="table-cell">{metrics.count}</div>
+                                    </div>
+                                    <div className="table-column">
+                                        <div className="table-cell heading">Total Games Won</div>
+                                        <div className="table-cell">{metrics.hasWon}</div>
+                                    </div>
+                                    <div className="table-column">
+                                        <div className="table-cell heading">Total Unique Players</div>
+                                        <div className="table-cell">{visitors}</div>
+                                    </div>
+                                    <div className="table-column">
+                                        <div className="table-cell heading">Average Mistakes</div>
+                                        <div className="table-cell">{metrics.mistakes.toFixed(2)}</div>
+                                    </div>
+                                    <div className="table-column">
+                                        <div className="table-cell heading">Number of shares</div>
+                                        <div className="table-cell">{metrics.shareCount}</div>
+                                    </div>
+                                </div>
                             </div>
                             :
                             <>Loading...</>

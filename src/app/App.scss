@@ -22,7 +22,8 @@ $purple: #82bc0d;
 $disabled: #7f7f7f;
 $pmr-green: #BDDC04;
 
-html, body {
+html,
+body {
   background: $pmr-green;
   width: 100%;
   padding: 0;
@@ -185,7 +186,8 @@ a {
   flex-direction: column;
   align-items: center;
 
-  h1, p {
+  h1,
+  p {
     margin: 0.1em 0;
   }
 
@@ -359,7 +361,7 @@ a {
   width: 120px;
 }
 
-#deselect-all-button[disabled], 
+#deselect-all-button[disabled],
 #submit-button[disabled] {
   border-color: #7f7f7f;
   background-color: $pmr-green;
@@ -593,8 +595,33 @@ a {
 }
 
 .metrics-wrapper {
-  // display: flex;
-  // justify-content: center;
+  .table {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+  }
+
+  .table-column {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+  }
+
+  .table-cell {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+
+    &.heading {
+      font-weight: 800;
+      // background: black;
+      // color: white;
+      min-height: 60px;
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 1px solid black;
+    }
+  }
 }
 
 .metrics-container {
@@ -602,8 +629,39 @@ a {
   max-width: 200px;
 }
 
-td, th {
+td,
+th {
   padding: 5px 15px;
+}
+
+@media screen and (max-width: 758px) {
+  .metrics-wrapper {
+    width: 100%;
+
+    .table {
+      width: 100%;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    .table-column {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 100%;
+      border-bottom: 1px solid black;
+    }
+
+    .table-cell {
+      align-items: center !important;
+      justify-content: center;
+
+      &.heading {
+        border: none;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 600px) {
