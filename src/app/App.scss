@@ -426,7 +426,7 @@ a {
 #popup-content {
   width: 100%;
   max-width: 520px;
-  padding: 50px 32px;
+  padding: 70px 32px;
   animation: slideIn 200ms;
   position: relative;
   background-color: white;
@@ -478,7 +478,6 @@ a {
 
   p {
     line-height: 1.5em;
-    margin: 10px 0;
   }
 
   button {
@@ -488,6 +487,14 @@ a {
     text-transform: uppercase;
     margin: 5px 0;
   }
+
+  img {
+    margin: 10px 0;
+  }
+}
+
+.popup-paragraph {
+  margin: 20px 0;
 }
 
 #share-image {

@@ -48,11 +48,7 @@ function App() {
             <div className="App">
                 <div className="header">
                     <Image src="/logo.png" width={100} height={60} alt="Payne Mitchell Ramsey Law Group" />
-                    {started ?
-                        <Image src="/help.png" width={40} height={54} alt="Help" id="gift" onClick={() => setPopup(2)} />
-                        :
-                        <></>
-                    }
+                    <Image src="/help.png" width={40} height={54} alt="Help" id="gift" onClick={() => setPopup(2)} />
                 </div>
                 <div className="game-wrapper">
                     <Connections gameData={data} popup={popup} setPopup={setPopup} />
