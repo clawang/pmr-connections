@@ -220,7 +220,7 @@ function Connections({ gameData, popup, setPopup }: {
                         <button id="submit-button" disabled={numSelected === 4 ? false : true} onClick={checkSubmit}>Submit</button>
                     </>
                     :
-                    <button onClick={() => setPopup(1)}>Share your results</button>
+                    <button onClick={() => setPopup(1)}>Invite others to play</button>
                 }
             </div>
         </>
