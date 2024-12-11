@@ -191,7 +191,7 @@ function Connections({ gameData, popup, setPopup }: {
             <div id="toast" className={toast.length > 0 ? "show" : ""}><p>{toast}</p></div>
             <PopUp popup={popup} setPopup={setPopup} />
             <h2>Let's Connect!</h2>
-            <p>Create four groups of four!</p>
+            <p>Create four groups of four.</p>
             <div className="connections-wrapper">
                 {completed.map((category, index) => <RowDone key={index} data={category} />)}
                 {splitRows().map((row, index) => <RowItems key={index} items={row.items} itemSelected={itemSelected} />)}

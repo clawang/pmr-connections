@@ -54,7 +54,7 @@ function App() {
                     <Connections gameData={data} popup={popup} setPopup={setPopup} />
                     <div className="start-screen">
                         <div className="info-wrapper">
-                            <p>For every connection game successfully completed, Payne Mitchell Ramsey will donate to Legal Aid of NorthWest Texas. If you would like to further contribute to this cause, you can make a direct donation  <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank">here</a>.</p>
+                            <p>For every connection game successfully completed, Payne Mitchell Ramsey will donate to Legal Aid of NorthWest Texas. If you’d also like to contribute to this cause, you can make a direct donation <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank">here</a>.</p>
                             {/* <p>Want to donate directly to legal aid?</p>
                             <a href="https://legalaidtx.org/support-our-work/donate/" target="_blank"><button className="donate-button">Donate Today</button></a> */}
                         </div>

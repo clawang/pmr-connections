@@ -82,6 +82,7 @@ function PopUp({ popup, setPopup }: {
                         <p>FISH: Bass, Flounder, Salmon, Trout</p>
                         <p>FIRE ___: Ant, Drill, Island, Opal</p>
                         <p>Categories will always be more specific than "Names," "Verbs" or "5-Letter-Words."</p>
+                        <br/>
                         <p>Each puzzle has exactly one solution. Watch out for words that seem to belong to multiple categories!</p>
                     </div>
                 }
