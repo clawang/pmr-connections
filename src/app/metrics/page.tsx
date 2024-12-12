@@ -80,7 +80,7 @@ function App() {
                                     </div>
                                     <div className="table-column">
                                         <div className="table-cell heading">Average Mistakes</div>
-                                        <div className="table-cell">{metrics.mistakes.toFixed(2)}</div>
+                                        <div className="table-cell">{metrics.mistakes ? metrics.mistakes.toFixed(2) : "N/A"}</div>
                                     </div>
                                     <div className="table-column">
                                         <div className="table-cell heading">Number of shares</div>
