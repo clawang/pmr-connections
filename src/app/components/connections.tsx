@@ -1,7 +1,7 @@
 import { useState, useEffect, SyntheticEvent } from 'react';
 import PopUp from './Popup';
 import { GameData, GameLevel, GameItem } from '../types';
-import { addGame } from '../../firebase/firebase';
+import { addGame, addShare } from '../../firebase/firebase';
 import Image from 'next/image';
 import '../App.scss';
 
@@ -15,6 +15,7 @@ function Connections({ gameData, popup, setPopup }: {
     const [mistakes, setMistakes] = useState(4);
     const [gameState, setGameState] = useState(0); // 0 playing, 1 is lost, 2 is won
     const [submitted, setSubmitted] = useState(false);
+    const [buttonState, setButtonState] = useState<number>(0);
 
     // manage UI
     const [toast, setToast] = useState("");
@@ -186,11 +187,19 @@ function Connections({ gameData, popup, setPopup }: {
         }, 1000);
     }
 
+    const share = () => {
+        addShare(new Date());
+        const text = "https://pmr-connections.vercel.app/";
+        navigator.clipboard.writeText(text);
+        setButtonState(1);
+        setTimeout(() => setButtonState(0), 1000);
+    }
+
     return (
         <>
             <div id="toast" className={toast.length > 0 ? "show" : ""}><p>{toast}</p></div>
             <PopUp popup={popup} setPopup={setPopup} />
-            <h2>Let's Connect!</h2>
+            <h2>Let’s Connect!</h2>
             <p>Create four groups of four.</p>
             <div className="connections-wrapper">
                 {completed.map((category, index) => <RowDone key={index} data={category} />)}
@@ -220,7 +229,7 @@ function Connections({ gameData, popup, setPopup }: {
                         <button id="submit-button" disabled={numSelected === 4 ? false : true} onClick={checkSubmit}>Submit</button>
                     </>
                     :
-                    <button onClick={() => setPopup(1)}>Invite others to play</button>
+                    <button onClick={share}>{buttonState < 1 ? "Invite others to Play" : "Copied to Clipboard"}</button>
                 }
             </div>
         </>
