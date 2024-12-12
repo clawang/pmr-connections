@@ -33,7 +33,7 @@ function App() {
                     const data = body as any;
                     // console.log(data.results?.[0]?.metrics?.[0]);
                     if (data.results?.[0]?.metrics?.[0]) {
-                        setVisitors(data.results[0].metrics[0]);
+                        setVisitors(data.results[0].metrics[0] - 63);
                     }
                 });
         }
